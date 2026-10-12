@@ -32,3 +32,11 @@ No retuning on test seeds. Pilot data may be used to establish a functioning sim
 ## Limitations
 
 Temporal residues are a change of coordinates in measured soma history, not access to dendritic compartments. The original forward model and conductance laws are assumed known to the experiment designer, not to the trained ridge predictor. A model could recover *predictive effects* while remaining unable to reconstruct the true hidden synapses or past input schedule. If the fixed probe does not expose useful nonlinear history dependence, record that and report it rather than redefining the task after seeing evaluation results.
+
+## Evaluation freeze details (set before fresh runs)
+
+- Independent fresh experiment seeds: `101, 211, 307, 419, 523`. Pilot seed `1` is excluded.
+- Per evaluation seed: 96 training, 48 validation, 64 test input histories. Each sample has two hidden prior port pulses, one hidden conditioning pulse, eight soma readings with independent Gaussian noise (σ = 0.06 mV), and four post-probe voltage-difference labels.
+- Early/late hidden port pairs (site indices 0–3 mapping to dendritic compartments 2–5): train = `(0,0),(0,1),(0,2),(1,0),(1,1),(1,3),(2,0),(2,2),(3,0),(3,1)`; validation = `(0,3),(1,2),(2,1)`; test = `(2,3),(3,2),(3,3)`.
+- Pre-probe times in ms: `4.05, 6.45, 8.55, 10.5, 12.6, 14.55, 16.5, 18.0`; probe onset 18.7 ms; scored times `20.7, 23.25, 26.1, 28.8` ms. Simulation dt = 0.15 ms and 200 steps.
+- Candidate ridge penalties: `1e-4, 1e-2, 0.1, 1.0, 10.0`. Same features and penalties across all three-scalar representations; search three coordinates with validation only; report means and all five per-seed RMSEs. These conditions are frozen with the code before any evaluation-seed metrics are inspected.
