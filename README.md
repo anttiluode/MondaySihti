@@ -98,7 +98,7 @@ Results are mean held-out RMSE over all five independent splits; all per-seed va
 - **G3-1 PASS:** full temporal difference representation restores the full eight noisy soma readings to machine precision; no new observability is created.
 - **G3-2 FAIL (primary):** three residues do not beat matched raw and PCA by at least 5%. Residue RMSE is about **19% higher than raw**.
 - **G3-3 FAIL:** raw-three improves on a single soma snapshot, but residue-three does not. Both were required.
-- **G3-0 pending upstream execution in CI:** the local high-throughput Numba solver was compared to the independent Python solver on ten pilot forward runs, all exactly matched in that environment. The exact pinned original Operaattori runtime also passed the separate small pilot in [the branch CI run](https://github.com/anttiluode/MondaySihti/actions/runs/38225860712). The [dedicated original-upstream G3 workflow](.github/workflows/g3-upstream.yml) verifies **all** evaluation programs and their held-out metrics; claim G3-0 PASS only after that workflow succeeds.
+- **G3-0 PASS:** the [exhaustive original-runtime run](https://github.com/anttiluode/MondaySihti/actions/runs/38226873814) re-evaluated **every** frozen train/validation/test history using the unmodified original pinned Operaattori `CausalGraphCircuit`, checked each simulated trace against the independent reference at ≤ 1e-8 mV discrepancy, and reproduced all stored held-out RMSEs. It also passed all 17 tests. See [dated validation receipt](docs/G3_UPSTREAM_VALIDATION_2026-10-12.md).
 
 **Reproduce the benchmark:**
 

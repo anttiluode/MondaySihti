@@ -23,7 +23,7 @@
     12.6,
     14.55,
     16.5,
-    18.0
+    18
   ],
   "probe_times_ms": [
     20.7,
@@ -35,7 +35,7 @@
   "assumptions": {
     "known_family": "Only learned polynomial feature mapping, not hidden circuit/source input schedule",
     "simulation_only": true,
-    "independent_upstream_verification": false
+    "independent_upstream_verification": true
   },
   "methods": {
     "snapshot": {
@@ -115,15 +115,15 @@
         },
         "pca_three": {
           "test_rmse": 0.4931040962277999,
-          "alpha": 10.0
+          "alpha": 10
         },
         "snapshot": {
           "test_rmse": 0.4494097329323144,
-          "alpha": 10.0
+          "alpha": 10
         },
         "full_eight": {
           "test_rmse": 0.6596100965642776,
-          "alpha": 1.0
+          "alpha": 1
         }
       },
       "example": {
@@ -177,7 +177,7 @@
         }
       },
       "diagnostics": {
-        "reference_error_mV": 0.0,
+        "reference_error_mV": 0,
         "residue_roundtrip_max": 1.7763568394002505e-15,
         "target_rms": 4.838702729620924,
         "target_variation": 0.917518744099982,
@@ -232,7 +232,7 @@
         },
         "full_eight": {
           "test_rmse": 0.5523275053589459,
-          "alpha": 10.0
+          "alpha": 10
         }
       },
       "example": {
@@ -286,7 +286,7 @@
         }
       },
       "diagnostics": {
-        "reference_error_mV": 0.0,
+        "reference_error_mV": 0,
         "residue_roundtrip_max": 3.1086244689504383e-15,
         "target_rms": 4.736959236003579,
         "target_variation": 0.9612270634528184,
@@ -329,19 +329,19 @@
             6,
             7
           ],
-          "alpha": 10.0
+          "alpha": 10
         },
         "pca_three": {
           "test_rmse": 0.5148276187335472,
-          "alpha": 10.0
+          "alpha": 10
         },
         "snapshot": {
           "test_rmse": 0.4365955070434629,
-          "alpha": 10.0
+          "alpha": 10
         },
         "full_eight": {
           "test_rmse": 0.7376204090627372,
-          "alpha": 1.0
+          "alpha": 1
         }
       },
       "example": {
@@ -395,7 +395,7 @@
         }
       },
       "diagnostics": {
-        "reference_error_mV": 0.0,
+        "reference_error_mV": 0,
         "residue_roundtrip_max": 1.7763568394002505e-15,
         "target_rms": 4.839912054819594,
         "target_variation": 0.9026196733096854,
@@ -450,7 +450,7 @@
         },
         "full_eight": {
           "test_rmse": 0.5008888639289775,
-          "alpha": 1.0
+          "alpha": 1
         }
       },
       "example": {
@@ -504,7 +504,7 @@
         }
       },
       "diagnostics": {
-        "reference_error_mV": 0.0,
+        "reference_error_mV": 0,
         "residue_roundtrip_max": 1.7763568394002505e-15,
         "target_rms": 4.779340326963231,
         "target_variation": 0.9025437690014019,
@@ -555,11 +555,11 @@
         },
         "snapshot": {
           "test_rmse": 0.44711515794721257,
-          "alpha": 10.0
+          "alpha": 10
         },
         "full_eight": {
           "test_rmse": 0.6178637777412175,
-          "alpha": 10.0
+          "alpha": 10
         }
       },
       "example": {
@@ -613,7 +613,7 @@
         }
       },
       "diagnostics": {
-        "reference_error_mV": 0.0,
+        "reference_error_mV": 0,
         "residue_roundtrip_max": 1.7763568394002505e-15,
         "target_rms": 4.786770411708704,
         "target_variation": 0.8615492769284588,
@@ -637,9 +637,19 @@
     }
   ],
   "gates": {
-    "G3_0_original_source_verified": false,
+    "G3_0_original_source_verified": true,
     "G3_1_exact_residue_inverse": true,
     "G3_2_residue_5pct_better_than_matched": false,
     "G3_3_both_histories_5pct_better_than_snapshot": false
+  },
+  "upstream_validation": {
+    "date": "2026-10-12",
+    "repository": "anttiluode/Operaattori",
+    "commit": "f2398939dc2ef2ec829093953c20637c74e82cd0",
+    "blob_sha": "433621a1a5a39a6ea3c2dcf47082c8e2a9085a47",
+    "runtime": "CausalGraphCircuit",
+    "run": "https://github.com/anttiluode/MondaySihti/actions/runs/38226873814",
+    "check": "PASS",
+    "method": "Every frozen evaluation program, both baseline and intervened: original upstream soma trace vs independent reference, max tolerance 1e-8 mV; then all five held-out scoring means reverified."
   }
 }
