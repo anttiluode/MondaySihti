@@ -1,0 +1,655 @@
+{
+  "schema": "mondaysihti.nonlinear.v1",
+  "date": "2026-10-12",
+  "source": "7-compartment illustrative passive cable with implicit voltage-dependent AMPA/NMDA",
+  "context": "Inputs fully hidden from learner; eight noisy soma pre-probe samples; four post-probe response targets",
+  "data_sizes": [
+    96,
+    48,
+    64
+  ],
+  "seeds": [
+    101,
+    211,
+    307,
+    419,
+    523
+  ],
+  "observed_times_ms": [
+    4.05,
+    6.45,
+    8.55,
+    10.5,
+    12.6,
+    14.55,
+    16.5,
+    18
+  ],
+  "probe_times_ms": [
+    20.7,
+    23.25,
+    26.1,
+    28.8
+  ],
+  "method": "Equal three-scalar observation budgets, quadratic ridge regression, train-validation selected regularization; disjoint port-pair families",
+  "assumptions": {
+    "known_family": "Only learned polynomial feature mapping, not hidden circuit/source input schedule",
+    "simulation_only": true,
+    "independent_upstream_verification": true
+  },
+  "methods": {
+    "snapshot": {
+      "mean_rmse": 0.4499375793164052,
+      "per_seed_rmse": [
+        0.4494097329323144,
+        0.46023642566073886,
+        0.4365955070434629,
+        0.45633107299829767,
+        0.44711515794721257
+      ]
+    },
+    "raw_three": {
+      "mean_rmse": 0.40356911347616464,
+      "per_seed_rmse": [
+        0.4581147946165226,
+        0.4230386147641376,
+        0.3768133906369677,
+        0.3981591230553957,
+        0.3617196443077994
+      ]
+    },
+    "residue_three": {
+      "mean_rmse": 0.48023319486462546,
+      "per_seed_rmse": [
+        0.564049724930578,
+        0.6896289771411239,
+        0.3838668866783452,
+        0.40238945656293734,
+        0.36123092901014303
+      ]
+    },
+    "pca_three": {
+      "mean_rmse": 0.45765284301348624,
+      "per_seed_rmse": [
+        0.4931040962277999,
+        0.4047272618755839,
+        0.5148276187335472,
+        0.4613314824853784,
+        0.4142737557451217
+      ]
+    },
+    "full_eight": {
+      "mean_rmse": 0.6136621305312311,
+      "per_seed_rmse": [
+        0.6596100965642776,
+        0.5523275053589459,
+        0.7376204090627372,
+        0.5008888639289775,
+        0.6178637777412175
+      ]
+    }
+  },
+  "by_seed": [
+    {
+      "seed": 101,
+      "methods": {
+        "raw_three": {
+          "val_rmse": 0.7716378401052691,
+          "test_rmse": 0.4581147946165226,
+          "choice": [
+            5,
+            6,
+            7
+          ],
+          "alpha": 0.0001
+        },
+        "residue_three": {
+          "val_rmse": 0.7536338638784957,
+          "test_rmse": 0.564049724930578,
+          "choice": [
+            0,
+            2,
+            5
+          ],
+          "alpha": 0.0001
+        },
+        "pca_three": {
+          "test_rmse": 0.4931040962277999,
+          "alpha": 10
+        },
+        "snapshot": {
+          "test_rmse": 0.4494097329323144,
+          "alpha": 10
+        },
+        "full_eight": {
+          "test_rmse": 0.6596100965642776,
+          "alpha": 1
+        }
+      },
+      "example": {
+        "pre_soma_observed": [
+          11.225573,
+          27.77115,
+          33.786594,
+          34.254571,
+          33.042067,
+          31.850606,
+          30.779339,
+          29.568084
+        ],
+        "response_actual": [
+          3.324605,
+          5.850341,
+          5.581619,
+          4.457776
+        ],
+        "predictions": {
+          "raw_three": [
+            3.087902,
+            5.85259,
+            5.885816,
+            4.678954
+          ],
+          "residue_three": [
+            3.544232,
+            6.52644,
+            6.195904,
+            4.784559
+          ],
+          "pca_three": [
+            2.819913,
+            5.261846,
+            5.432278,
+            4.47443
+          ],
+          "snapshot": [
+            3.022149,
+            5.858723,
+            5.973716,
+            4.750359
+          ],
+          "full_eight": [
+            3.121439,
+            5.723325,
+            5.878158,
+            4.697823
+          ]
+        }
+      },
+      "diagnostics": {
+        "reference_error_mV": 0,
+        "residue_roundtrip_max": 1.7763568394002505e-15,
+        "target_rms": 4.838702729620924,
+        "target_variation": 0.917518744099982,
+        "first_example_readings": [
+          11.225573,
+          27.77115,
+          33.786594,
+          34.254571,
+          33.042067,
+          31.850606,
+          30.779339,
+          29.568084
+        ],
+        "first_example_probe": [
+          3.324605,
+          5.850341,
+          5.581619,
+          4.457776
+        ]
+      }
+    },
+    {
+      "seed": 211,
+      "methods": {
+        "raw_three": {
+          "val_rmse": 0.5880950719994041,
+          "test_rmse": 0.4230386147641376,
+          "choice": [
+            2,
+            6,
+            7
+          ],
+          "alpha": 0.0001
+        },
+        "residue_three": {
+          "val_rmse": 0.6200755738375812,
+          "test_rmse": 0.6896289771411239,
+          "choice": [
+            1,
+            4,
+            6
+          ],
+          "alpha": 0.0001
+        },
+        "pca_three": {
+          "test_rmse": 0.4047272618755839,
+          "alpha": 0.0001
+        },
+        "snapshot": {
+          "test_rmse": 0.46023642566073886,
+          "alpha": 0.0001
+        },
+        "full_eight": {
+          "test_rmse": 0.5523275053589459,
+          "alpha": 10
+        }
+      },
+      "example": {
+        "pre_soma_observed": [
+          6.278435,
+          21.580677,
+          27.83324,
+          29.078999,
+          28.389257,
+          26.713262,
+          25.334546,
+          24.255891
+        ],
+        "response_actual": [
+          3.750062,
+          6.812496,
+          6.193773,
+          4.731585
+        ],
+        "predictions": {
+          "raw_three": [
+            3.636381,
+            6.845822,
+            6.580014,
+            5.018741
+          ],
+          "residue_three": [
+            3.161261,
+            5.879213,
+            5.862769,
+            4.657425
+          ],
+          "pca_three": [
+            3.579003,
+            6.642881,
+            6.36642,
+            4.894025
+          ],
+          "snapshot": [
+            3.266387,
+            6.256407,
+            6.181412,
+            4.837381
+          ],
+          "full_eight": [
+            3.489423,
+            6.539911,
+            6.462884,
+            5.006155
+          ]
+        }
+      },
+      "diagnostics": {
+        "reference_error_mV": 0,
+        "residue_roundtrip_max": 3.1086244689504383e-15,
+        "target_rms": 4.736959236003579,
+        "target_variation": 0.9612270634528184,
+        "first_example_readings": [
+          6.278435,
+          21.580677,
+          27.83324,
+          29.078999,
+          28.389257,
+          26.713262,
+          25.334546,
+          24.255891
+        ],
+        "first_example_probe": [
+          3.750062,
+          6.812496,
+          6.193773,
+          4.731585
+        ]
+      }
+    },
+    {
+      "seed": 307,
+      "methods": {
+        "raw_three": {
+          "val_rmse": 0.8177063131719889,
+          "test_rmse": 0.3768133906369677,
+          "choice": [
+            0,
+            6,
+            7
+          ],
+          "alpha": 0.0001
+        },
+        "residue_three": {
+          "val_rmse": 0.8002156553882905,
+          "test_rmse": 0.3838668866783452,
+          "choice": [
+            2,
+            6,
+            7
+          ],
+          "alpha": 10
+        },
+        "pca_three": {
+          "test_rmse": 0.5148276187335472,
+          "alpha": 10
+        },
+        "snapshot": {
+          "test_rmse": 0.4365955070434629,
+          "alpha": 10
+        },
+        "full_eight": {
+          "test_rmse": 0.7376204090627372,
+          "alpha": 1
+        }
+      },
+      "example": {
+        "pre_soma_observed": [
+          5.219584,
+          25.029335,
+          31.002267,
+          31.486769,
+          30.447445,
+          28.887748,
+          27.828688,
+          26.902806
+        ],
+        "response_actual": [
+          3.656563,
+          6.526116,
+          5.95697,
+          4.586955
+        ],
+        "predictions": {
+          "raw_three": [
+            3.279769,
+            6.1227,
+            5.964918,
+            4.681552
+          ],
+          "residue_three": [
+            3.325864,
+            6.273128,
+            6.133955,
+            4.77739
+          ],
+          "pca_three": [
+            3.129813,
+            5.75403,
+            5.696619,
+            4.559774
+          ],
+          "snapshot": [
+            3.1278,
+            5.925467,
+            5.913311,
+            4.696311
+          ],
+          "full_eight": [
+            3.569921,
+            6.457859,
+            6.20927,
+            4.814442
+          ]
+        }
+      },
+      "diagnostics": {
+        "reference_error_mV": 0,
+        "residue_roundtrip_max": 1.7763568394002505e-15,
+        "target_rms": 4.839912054819594,
+        "target_variation": 0.9026196733096854,
+        "first_example_readings": [
+          5.219584,
+          25.029335,
+          31.002267,
+          31.486769,
+          30.447445,
+          28.887748,
+          27.828688,
+          26.902806
+        ],
+        "first_example_probe": [
+          3.656563,
+          6.526116,
+          5.95697,
+          4.586955
+        ]
+      }
+    },
+    {
+      "seed": 419,
+      "methods": {
+        "raw_three": {
+          "val_rmse": 0.6187844522038665,
+          "test_rmse": 0.3981591230553957,
+          "choice": [
+            1,
+            3,
+            7
+          ],
+          "alpha": 0.0001
+        },
+        "residue_three": {
+          "val_rmse": 0.6345717583293097,
+          "test_rmse": 0.40238945656293734,
+          "choice": [
+            3,
+            6,
+            7
+          ],
+          "alpha": 0.0001
+        },
+        "pca_three": {
+          "test_rmse": 0.4613314824853784,
+          "alpha": 0.0001
+        },
+        "snapshot": {
+          "test_rmse": 0.45633107299829767,
+          "alpha": 0.0001
+        },
+        "full_eight": {
+          "test_rmse": 0.5008888639289775,
+          "alpha": 1
+        }
+      },
+      "example": {
+        "pre_soma_observed": [
+          5.757937,
+          21.439058,
+          27.240665,
+          27.784466,
+          26.403103,
+          26.314407,
+          26.696568,
+          25.7225
+        ],
+        "response_actual": [
+          3.380999,
+          6.170653,
+          6.040974,
+          4.78985
+        ],
+        "predictions": {
+          "raw_three": [
+            3.056657,
+            5.828254,
+            5.875306,
+            4.719957
+          ],
+          "residue_three": [
+            3.421643,
+            6.248566,
+            6.042181,
+            4.732739
+          ],
+          "pca_three": [
+            2.994133,
+            5.703509,
+            5.749907,
+            4.635823
+          ],
+          "snapshot": [
+            3.12157,
+            5.914138,
+            5.900427,
+            4.705233
+          ],
+          "full_eight": [
+            3.296926,
+            6.130447,
+            6.032863,
+            4.783311
+          ]
+        }
+      },
+      "diagnostics": {
+        "reference_error_mV": 0,
+        "residue_roundtrip_max": 1.7763568394002505e-15,
+        "target_rms": 4.779340326963231,
+        "target_variation": 0.9025437690014019,
+        "first_example_readings": [
+          5.757937,
+          21.439058,
+          27.240665,
+          27.784466,
+          26.403103,
+          26.314407,
+          26.696568,
+          25.7225
+        ],
+        "first_example_probe": [
+          3.380999,
+          6.170653,
+          6.040974,
+          4.78985
+        ]
+      }
+    },
+    {
+      "seed": 523,
+      "methods": {
+        "raw_three": {
+          "val_rmse": 0.6410892323656815,
+          "test_rmse": 0.3617196443077994,
+          "choice": [
+            5,
+            6,
+            7
+          ],
+          "alpha": 0.0001
+        },
+        "residue_three": {
+          "val_rmse": 0.6370489824931822,
+          "test_rmse": 0.36123092901014303,
+          "choice": [
+            5,
+            6,
+            7
+          ],
+          "alpha": 0.0001
+        },
+        "pca_three": {
+          "test_rmse": 0.4142737557451217,
+          "alpha": 0.0001
+        },
+        "snapshot": {
+          "test_rmse": 0.44711515794721257,
+          "alpha": 10
+        },
+        "full_eight": {
+          "test_rmse": 0.6178637777412175,
+          "alpha": 10
+        }
+      },
+      "example": {
+        "pre_soma_observed": [
+          4.407364,
+          24.29391,
+          30.474167,
+          31.333112,
+          30.171818,
+          29.578486,
+          29.379296,
+          28.43233
+        ],
+        "response_actual": [
+          3.651706,
+          6.905368,
+          6.6021,
+          4.994367
+        ],
+        "predictions": {
+          "raw_three": [
+            3.178783,
+            5.969531,
+            5.966935,
+            4.737266
+          ],
+          "residue_three": [
+            3.169496,
+            5.954288,
+            5.96177,
+            4.738531
+          ],
+          "pca_three": [
+            3.056852,
+            5.758526,
+            5.799315,
+            4.644253
+          ],
+          "snapshot": [
+            2.985538,
+            5.719183,
+            5.839092,
+            4.68645
+          ],
+          "full_eight": [
+            2.865744,
+            5.393105,
+            5.527488,
+            4.536011
+          ]
+        }
+      },
+      "diagnostics": {
+        "reference_error_mV": 0,
+        "residue_roundtrip_max": 1.7763568394002505e-15,
+        "target_rms": 4.786770411708704,
+        "target_variation": 0.8615492769284588,
+        "first_example_readings": [
+          4.407364,
+          24.29391,
+          30.474167,
+          31.333112,
+          30.171818,
+          29.578486,
+          29.379296,
+          28.43233
+        ],
+        "first_example_probe": [
+          3.651706,
+          6.905368,
+          6.6021,
+          4.994367
+        ]
+      }
+    }
+  ],
+  "gates": {
+    "G3_0_original_source_verified": true,
+    "G3_1_exact_residue_inverse": true,
+    "G3_2_residue_5pct_better_than_matched": false,
+    "G3_3_both_histories_5pct_better_than_snapshot": false
+  },
+  "upstream_validation": {
+    "date": "2026-10-12",
+    "repository": "anttiluode/Operaattori",
+    "commit": "f2398939dc2ef2ec829093953c20637c74e82cd0",
+    "blob_sha": "433621a1a5a39a6ea3c2dcf47082c8e2a9085a47",
+    "runtime": "CausalGraphCircuit",
+    "run": "https://github.com/anttiluode/MondaySihti/actions/runs/38226873814",
+    "check": "PASS",
+    "method": "Every frozen evaluation program, both baseline and intervened: original upstream soma trace vs independent reference, max tolerance 1e-8 mV; then all five held-out scoring means reverified."
+  }
+}

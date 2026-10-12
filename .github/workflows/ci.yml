@@ -39,3 +39,7 @@ jobs:
         env:
           OPENBLAS_NUM_THREADS: '1'
         run: python experiments/bridge.py --operaattori upstream/Operaattori --check --output data/results.json
+      - name: Test G3 pilot against original Operaattori nonlinear runtime
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: python -m experiments.nonlinear --operaattori upstream/Operaattori --pilot

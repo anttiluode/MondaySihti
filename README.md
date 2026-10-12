@@ -72,3 +72,43 @@ Use a controlled *state-dependent* neuronal operator (including local NMDA), hid
 [Sihti](https://github.com/anttiluode/Sihti) · [Sihti2](https://github.com/anttiluode/Sihti2) · [SighImageFactorization](https://github.com/anttiluode/SighImageFactorization) · [Operaattori](https://github.com/anttiluode/Operaattori) · [MondayRepo](https://github.com/anttiluode/MondayRepo) · [SihtiSort](https://github.com/anttiluode/SihtiSort)
 
 MIT. The repository does not import code from the above projects into its Git tree; CI imports the original pinned Operaattori source from a separate checkout for validation.
+
+---
+
+## G3 · Nonlinear history: the residue advantage does not materialize
+
+[Open the interactive nonlinear gate](https://anttiluode.github.io/MondaySihti/#nonlinear) · [Protocol frozen before evaluation](PROTOCOL_G3.md) · [All five seeds and held-out traces](data/nonlinear_results.json) · [Run against pinned original Operaattori](.github/workflows/g3-upstream.yml)
+
+G3 moves beyond the passive operator. A **seven-compartment illustrative neuron** is simulated with local AMPA/NMDA conductances and voltage-dependent magnesium block in the same compiled causal-cable equations as Operaattori. Each synthetic history contains two prior dendritic input pulses and a conditioning pulse; the observer is **not told** their port locations, timings or amplitudes. It receives only eight noisy soma readings before a fixed probe, and its supervised target consists of four values of the future soma response caused by that probe (probe run minus matched no-probe run).
+
+Train, validation and test **withhold whole ordered port-pair combinations**: 96/48/64 histories per seed. Five frozen seeds: 101, 211, 307, 419, 523. The same degree-two polynomial ridge model receives exactly **three scalar observations** from raw checkpoint selection, difference-band selection or trained PCA. Choices/regularization are trained and tuned without test targets. The full-eight method has a larger information/parameter budget and is not a fair control for G3-2. All results are synthetic with known labels; neither the input history nor the dendritic state is recovered.
+
+| Representation | Mean held-out future probe-response RMSE (mV) | Observation budget |
+| --- | ---: | ---: |
+| Last soma reading alone | 0.44994 | 1 |
+| **Three raw soma readings** | **0.40357** | 3 |
+| **Three Sihti residues** | 0.48023 | 3 |
+| Train-fitted PCA | 0.45765 | 3 |
+| Eight full-history PCA coordinates | 0.61366 | 8 (unmatched, overfit possible) |
+
+Results are mean held-out RMSE over all five independent splits; all per-seed values are preserved in the JSON. The full-eight model can do *worse* because its degree-two expansion has many more coefficients relative to training examples and the test contains new stimulus combinations; it is not an oracle and **not** a lower bound on error.
+
+**Gate verdicts:**
+
+- **G3-1 PASS:** full temporal difference representation restores the full eight noisy soma readings to machine precision; no new observability is created.
+- **G3-2 FAIL (primary):** three residues do not beat matched raw and PCA by at least 5%. Residue RMSE is about **19% higher than raw**.
+- **G3-3 FAIL:** raw-three improves on a single soma snapshot, but residue-three does not. Both were required.
+- **G3-0 PASS:** the [exhaustive original-runtime run](https://github.com/anttiluode/MondaySihti/actions/runs/38226873814) re-evaluated **every** frozen train/validation/test history using the unmodified original pinned Operaattori `CausalGraphCircuit`, checked each simulated trace against the independent reference at ≤ 1e-8 mV discrepancy, and reproduced all stored held-out RMSEs. It also passed all 17 tests. See [dated validation receipt](docs/G3_UPSTREAM_VALIDATION_2026-10-12.md).
+
+**Reproduce the benchmark:**
+
+```bash
+pip install numpy==2.1.3 numba==0.61.2
+OPENBLAS_NUM_THREADS=1 python -m experiments.fast_reference
+python -m unittest discover -s tests -v
+
+# Requires an independent checkout of pinned original Operaattori:
+OPENBLAS_NUM_THREADS=1 python -m experiments.nonlinear --operaattori /path/to/Operaattori --check --output data/nonlinear_results.json
+```
+
+The frozen result contradicts the claim that a compressed Sihti residue representation inherently extracts more useful hidden-state information than ordinary time samples. It is a **negative gate**, not evidence against all possible state-dependent or nonlinear residue algorithms. The next justified question would change the mechanism—not merely the representation—such as adapting a measurement or an operator based on residual prediction error, while testing against capacity-matched recurrent or direct-history alternatives.
